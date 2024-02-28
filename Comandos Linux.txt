@@ -1,0 +1,229 @@
+Terminal do Linux
+	Apertar TAB completa o comando e dá sugestões caso tenha mais de um comando parecido.
+	Tecla pra cima puxa os comandos utilizados anteriormente.
+	A variável declarada em um terminal, só é válida no terminal em que foi declarada.
+	Linux é case sensitive, ou seja, AULA =! aula =! AuLa =! auLa , por exemplo.
+	
+
+
+Comandos no Terminal do Linux:
+	ctrlD + F1-F6 --> Abre o console, de 1 a 6.
+	ctrlD + F7 --> Fecha o console e volta pro desktop.
+	botão direito + "abrir no terminal" --> abre o terminal no bash.
+	sudo su - --> entra no usuário Root.
+		logout --> usuário root.
+		usuário root = administrador máximo do sistema, podendo inclusive apagar tudo.
+	firefox --> abre o firefox.
+	date --> mostra a data e hora.
+	clear --> limpa tudo.
+	clear;date --> dá um clear, e depois mostra a data.
+	VAR1=Linux --> cria uma variável.
+		echo $VAR1 --> imprime "Linux"(variavel)
+	echo oii --> imprime a string. Neste caso, ele imprime "oii"
+	VAR2="Declarando variavel"
+		quando a string possui mais de uma palavra, é necessário colocar entre aspas.
+	echo $user --> é uma variável que já existe, e imprime o usuário atual.
+	env --> mostra uma série de variáveis.
+	VAR3=`date` --> entre crases, ele armazena o resultado de "date" na variável comando.
+		echo VAR3 --> vai imprimir a data.
+	echo $$ --> mostra o "id" do terminal.
+	bash --> cria outro terminal dentro do outro (bash filho), com um "id" diferente. Para checar, só dar "echo $$" e ver se está diferente.
+	export VAR1 --> exporta a variável para o bash filho.
+	export VAR4="teste" --> já cria e exporta ao mesmo tempo.
+	set --> mostra todas as variáveis do ambiente.
+	env --> mostra apenas as variáveis importadas.
+	
+	--help --> o linux dá uma ajuda, dizendo oq o comando faz e mostra como utilizar.
+		date --help;
+		env --help;
+	man --> mostra o manual do comando. É mais completo que o date.
+		man date;
+	info --> também traz um manual, deveria ser uma melhoria do man.
+		info date;
+	whatis --> mostra de forma simples o que o comando faz.
+		whatis date;
+		whatis clear;
+	apropos --> você escreve oq quer fazer e ele sugere o comando envolvendo o que foi digitado.
+		apropos "time" --> ele mostra todos que envolvem "time".
+		apropos "system date" --> mostra apenas o "date", que é o único que envolve a data do sistema.
+	whereis --> mostra onde está o comando.
+		whereis date;
+		
+	cd --> change directory.
+		cd /home-> muda para o diretório "home".
+		cd .. --> volta um nível do diretório.
+		cd - --> volta para o diretório que estava anteriormente.
+		cd --> sem nada, volta pro home. Funciona igual com ~.
+	pwd --> mostra em que diretório você está.
+	ls --> mostra todos os arquivos e diretórios que estão dentro do diretório em que você está.
+		ls -lh mozilla.pdf --> mostra o tamanho do arquivo, o horário que foi modificado, o formato etc.
+		ls -lh /tmp --> lista as descrições de todos os arquivos em /tmp.
+		ls -a --> mostra arquivos ocultos. Arquivos ocultos começam com ponto(.) .
+	
+	
+Criar diretório, mover, ler:
+	mkdir Teste --> cria um diretório.
+		mkdir -p pasta1/pasta2 --> cria 2 pastas, mesmo a primeira ainda não existindo. Sem o -p não funciona.
+	rmdir pasta2 --> remove um diretório. Porém, para funcionar, a pasta deve estar vazio.
+	rm -r pasta1--> remove um diretório com tudo que estádentro, mesmo com itens. Perigoso.
+	touch --> cria um arquivo em branco.
+	cp --> copia um arquivo.
+		cp [origem(oq vai ser copiado)] [destino(ou nome)];
+		cp exemplo1 exemplo 2 --> cria um arquivo no mesmo local.
+		cp exemplo1 pasta2 --> cria um arquivo copiado na pasta destino.
+		cp -r Pasta1 Pasta2 --> para copiar diretório, é necessário utilizar o "-r".
+	mv origem destino--> move ou renomeia um arquivo ou diretório.
+		mv exemplo1 Pasta1 --> move o arquivo para a pasta1.
+		mv exemplo1 exemplo11 --> renomeia o arquivo.
+		**não precisa de -r para modificar diretórios.
+	
+	ls -l Aula* --> mostra todos os arquivos que começam com "Aula".
+		ls -l A* --> mostra todos os arquivos que começam com A maiúsculo, por exemplo.
+		ls -l A*1 --> mostra todos os arquivos que começam com A e terminam com 1. O asterisco representa que pode ter qualquer coisa no meio.
+	ls -l aula[12345] --> mostra todos os arquivos que começam com aula e terminam com qualquer caractere nos colchetes.
+		ls -l aula[1-5] --> também funciona.
+		ls -l aula[ABC](ou[A-C])--> também funciona. 
+		ls -l [Aa]ula --> mostra tanto com A maiúsculo quanto com A minúsculo.
+	ls -l {Aula,AULA}11 --> mostra todos os arquivos que começam com Aula e AULA e depois vem com um 11.
+	ls -l Aula1? --> mostra todos os arquivos que possuem 1, sendo o "?" representando que pode ser qualquer caractere depois do 1.	
+		ls -l Aula?? --> mostra todos que possuem quaisquer outros 2 algarismos no mínimo. 
+
+Compactar e Localizar:	
+	tar c/x/t--> agrupa os arquivos.
+		tar cf backup.tar *png --> agrupa todos os arquivos que terminem em png.
+		tar tf backup.tar --> mostra todos os arquivos que estão agrupados.
+		tar xvf backup.tar --> descompacta todos os arquivos.
+	gzip --> compacta os arquivos.
+		gzip backup.tar --> compacta o arquivo backup.tar.
+		gzip pesquisa1.png --> compacta o arquivo png.
+		gzip -d backup.tar --> descompacta.
+		gunzip backup.tar --> também descompacta.
+	find --> procura o arquivo.
+		find \home --> procura todos os arquivos que possuem o caminho \home.
+		find Teste --> procura tudo que tem Teste.
+	locate --> procura de forma mais precisa de acordo com a combinação de letras.
+		locate rpm --> procura tudo que tem "rpm" no nome.
+	whereis --> procura por biblioteca, manuais e fontes.
+
+Manipular Textos:	
+	cat texto.txt--> lê arquivos.
+		cat -n texto.txt --> indica as linhas.
+		cat texto1.txt > texto2 --> cria outro arquivo igual, com o mesmo conteúdo, mas nome diferente.
+		cat *txt --> mostra todos os conteúdos txt do diretório.
+		cat texto1 >> texto2 --> cria um arquivo concatenado. O texto 2 terá 2 linhas, com o conteúdo do 1 e do 2.
+	less texto.txt--> mostra menos, assim, você pode ir navegando e lendo o conteúdo aos poucos.
+		/palavra --> ele procura a palavra no arquivo e a destaca.
+	head -nX texto.txt --> mostra o começo do arquivo
+		head -n10 texto.txt --> mostra as 10 primeiras linhas do arquivo.
+	tail -nX texto.txt --> mostra o final do arquivo
+		tail -n10 texto.txt --> mostra as 10 últimas linhas do arquivo.
+		
+	wc texto.txt --> conta quantas linhas, palavras e caracteres tem o arquivo de texto.
+		wc -l texto.txt --> pega apenas as linhas.
+		wc -w --> apenas as palavras.
+		wc -m --> apenas as linhas.
+	sort nomes.txt --> deixa em ordem alfabética. Não altera o arquivo.
+		sort -r nomes.txt --> ordem contrária.
+		sort -u --> remove os duplicados.
+		sort -k2 --> ordena pelo segundo campo(sobrenomes, por exemplo).
+	sort nomes.txt >> ordenados.txt --> cria outro arquivo, agora ordenado.
+	uniq nomes.txt -->  mostra todo o conteúdo sem os duplicados.
+		uniq -u nomes.txt --> mostra apenas os que não têm duplicados, apenas os únicos.
+		uniq -d nomes.txt --> mostra apenas os que estão duplicados.
+	cut -c1-5 nomes.txt --> pega todos os primeiros 5 caracteres do arquivo.
+	cut -f1 -d" " nomes.txt --> pega apenas o primeiro campo (nome) e nao mostra o sobrenome.
+		**a partir do momento que ele encontra um " " ele para e corta.
+	
+	cat texto.txt | less --> junta os dois comandos de um só. Isso se chama pipe.
+	cat texto.txt | tail | wc --> mostra quantas palavras tem no final do arquivo, por exemplo.
+	sort nomes.txt | uniq -d --> ele ordena e já sai com os duplicados.
+	
+	grep Alves nomes.txt --> Mostra a linha toda com os nomes que possuem "Alves" na mesma linha.
+		grep Caio nomes.txt --> Mostra todos os "Caio" no arquivo.
+		grep Caio -c nomes.txt --> mostra quantas ocorrências, contando quantas vezes o nome Caio aparece.
+		grep -v Caio nomes.txt --> mostra todas as linhas que NÃO possuem a palavra "Caio"
+		grep Caio *txt --> procura a palavra "Caio" em todos os arquivos txt do diretório.
+		
+	nano --> abre um editor de texto no terminal.
+		CTRL O para salvar.
+		CTRL X para sair.
+	vi --> editor de texto.
+	
+Processos:
+	ps axu --> mostra todos os processos ativos no momento.
+	ps u --> mostra com detalhes os processos ativos no computador.
+	kill --> envia um sinal e mata o processo.
+		kill -l --> mostra os sinais.
+			SIGHUP = encerra ou reinicia um processo. Cada aplicação responde de um jeito.
+			SIGTERM = termina o que está fazendo e encerra.
+			SIGKILL = encerra um processo forçadamente. (-9)
+			[...]
+		pgrep firexo --> verifica o id do firexox
+			kill 6243 --> encerra o firefox.
+		pgrep tail 
+			kill -9 PID --> encerra o programa que estaria mostrando uma tail.
+	pkill --> outro comando para encerrar um programa.
+		pkill firefox --> encerra o firefox.
+	killall --> apaga todos os processos.
+		killall apache2 --> apaga todos os processos do Apache.
+	
+	systemctl --> mostra os status do serviço.
+		systemctl apache2 --> mostra todos os status do apache.
+	firefox --> abre o firefox, porém ele abrirá em foreground e ficará preso.
+		firefox & --> abre o firefox em background.
+		para trocar de foreground para background, é só usar o comando "bg"
+	
+	
+Visualizar Recursos do Sistema:
+	top --> monitora os processos do sistema. Abre um monitor que descreve os processos em execução, status, consumo de CPU, memória etc.
+		shift + M --> ordena por consumo de memória.
+		shift + P --> ordena por uso de CPU.
+		H --> help, mostra os comandos.
+	free --> vê quanto de memória você tem na máquina, quanto está usando e quanto está livre.
+		free -h --> mostra em formato humano, pois em GB fica mais fácil de ver.
+	uptime --> diz a quanto tempo a máquina está ligada, quantos usuários estão logados e a load average.
+		load average --> média dos últimos 1 minuto, 5 minutos e 15 minutos.
+	uname --> mostra informações do sistema. Versão do kernel, quando foi instalado, processador.
+		uname -a --> mostra tudo.
+		uname --help --> mostra os comandos.
+	df -h --> mostra as partições de disco.
+	
+Atualização e Instalação:
+	dpkg --> comando para manipular pacotes Debian.
+		dpkg -l --> lista todos os pacotes instalados do linux.
+	apt --> verifica os instaladores apt.
+		apt-get --> faz a instalação de pacotes do sistema.
+		apt-get upgrade --> verifica se tem versões novas e atualiza.
+			apt-get upgrade firefox --> atualiza o firefox, por exemplo.
+		apt-get install --> instala uma aplicação.
+			apt-get install midori --> baixa o navegador "midori" e seus pacotes.
+		apt-get remove/purge --> apaga e remove o arquivo. Tanto purge quanto remove funcionam.
+			apt-get purge midori --> apaga o aplicativo baixado anteriormente.
+	
+Desligar e Reiniciar:
+	reboot --> reinicia a máquina.
+	poweroff --> desliga a máquina.
+	shutdown --> sem argumento nenhum, ele desliga em 1 minuto. Para cancelar, só digitar: "shutdown -c".
+		shutdown 18:00 --> programa para desligar às 18h pelo horário do sistema.
+		shutdown now --> desliga imediatamente.
+		shutdown --help --> para ver as opções.
+
+Logs:
+	cd /var/log --> diretório em que estão localizados os logs.
+
+Gerenciamento de Usuários:
+	vi etc/paswd --> para ver todos os usuários do sistema.
+	vi etc/hadow --> guarda a senha dos usuários em hash (criptografado).
+	vi etc/group --> guarda os grupos do sistema.
+	useradd --> adiciona um novo usuário.
+		user add -m --> força a criação de um diretório no /home
+			user add usuarioTeste -m --> cria um usuário.
+	userdel --> delete um usuário.
+		user del -r usuarioTeste --> deleta o usuário criado.
+	usermod --> modifica o usuário.
+		usermod -c "é um uuario de teste" --> põe uma descrição no usuário.
+	passwd --> troca a senha. Se não especificado, troca a senha do root.
+		passwd usuarioTeste --> troca a senha do usuário especificado.
+	whoami --> mostra qual o usuário logado no momento.
+	id --> mostra o id do usuário.
+	group --> mostra os grupos que o usuário está.
